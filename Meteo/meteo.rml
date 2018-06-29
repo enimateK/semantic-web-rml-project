@@ -1,0 +1,206 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix mail: <http://example.com/mail#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix ex: <http://www.example.com/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+
+@prefix meteo: <http://meteo.com/>.
+
+<#WeatherMeasurement>
+rml:logicalSource [
+    rml:source "Meteo.json";
+  rml:referenceFormulation ql:JSONPath;
+  rml:iterator "$.[*]"
+];
+
+rr:subjectMap [
+  rr:template "www.example.org/WeatherMeasurement/{$.fields.date}{$.fields.coordonnees[0]}{$.fields.coordonnees[1]}";
+  rr:class meteo:WeatherMeasurement
+];
+
+rr:predicateObjectMap [ rr:objectMap [ rml:reference "$.fields.date" ] ;
+                # ------ URI predicate
+                rr:predicate xsd:date ],
+
+ [ rr:objectMap [
+        rml:reference "$.fields.ht_neige" ] ;
+        rr:predicate <http://purl.oclc.org/NET/ssnx/meteo/aws#SnowHeight> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.tn_12" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#Rainfall> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.numer_sta" ] ;
+        rr:predicate <http://dbpedia.org/ontology/Station> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.vv" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#Visibility> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.etat_sol" ] ;
+        rr:predicate <http://data.ign.fr/def/topo#etatSol> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.rr3" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#PrecipitationSensor#3> 
+    ], 
+
+
+ [ rr:objectMap [
+        rml:reference "$.fields.rr24" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#PrecipitationSensor#24> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.tend24" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#PressureSensor#24> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.per" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#WindSpeedSensor> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.tend" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#PressureSensor>
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.temps_present" ] ;
+        rr:predicate <https://www.example.org/TempsPresent> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.rr1" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#PrecipitationSensor#1> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.type_de_tendance_barometrique" ] ;
+        rr:predicate <http://example.com/tendance_barometrique> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.td" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#DewPoint> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.pres" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#Pressure#air> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.pmer" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#Pressure#mer> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.nom" ] ;
+        rr:predicate <http://data.ign.fr/def/geofla#Commune> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.tx12" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#Temperature"> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.tminsol" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#SoilTemperature> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.dd" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#WindDirection> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.ww" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#Weather> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.cod_tend" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#AtmosphericPressureSensor> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.ff" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#WindSpeed> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.date" ] ;
+        rr:predicate xsd:date 
+    ], 
+
+ [ rr:objectMap [
+       rml:reference "$.fields.rr6" ] ;
+       rr:predicate <http://purl.org/iot/vocab/m3-lite#PrecipitationSensor#6> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.raf10" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#MinuteTime> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.rafper" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#WindSpeedSensor#rafper> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.rr12" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#PrecipitationSensor#12> 
+    ],
+
+ [ rr:objectMap [
+        rml:reference "$.fields.n" ] ;
+        rr:predicate <http://example.com/nebulosity> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.u" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#Humidity> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.t" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#AirTemperature> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.nnuage1" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#CloudCover#1> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.nnuage2" ] ;
+        rr:predicate <http://purl.org/iot/vocab/m3-lite#CloudCover#2> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.hbas" ] ;
+        rr:predicate <http://example.com/cloudHigh2> 
+    ], 
+
+ [ rr:objectMap [
+        rml:reference "$.fields.nbas" ] ;
+        rr:predicate <http://example.com/cloudNebulosity2> 
+    ]. 
+
+ 
+

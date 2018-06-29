@@ -1,0 +1,118 @@
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#>.
+
+@prefix conso: <http://conso.com/> .
+
+<#Iris> 
+
+    rml:logicalSource [ 
+        rml:iterator "$.[*].fields" ;
+        rml:referenceFormulation ql:JSONPath ;
+        rml:source "./consommation-annuelle-par-iris.json"
+    ];
+    
+    rr:subjectMap [ 
+        rr:class conso:Iris ;
+        rr:template "http://conso.com/iris/{iris}" 
+    ];
+
+    rr:predicateObjectMap [
+        rr:objectMap [ rml:reference "$.iris" ] ;
+        rr:predicate rdfs:label 
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.commune" ] ;
+        rr:predicate <http://data.ign.fr/def/geofla#Commune> 
+    ], 
+    
+    [ rr:objectMap [
+        rml:reference "$.departement" ] ;
+        rr:predicate <http://data.ign.fr/def/geofla#Departement> 
+    ], 
+    
+    [ rr:objectMap [
+        rml:reference "$.region" ] ;
+        rr:predicate <http://data.ign.fr/def/geofla#Region> 
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.consommation_totale" ] ;
+        rr:predicate conso:ConsommationTotale
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.annee" ] ;
+        rr:predicate <http://dbpedia.org/ontology/year>
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.code_insee_region" ] ;
+        rr:predicate <http://data.ign.fr/def/geofla#codeReg>
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.code_insee_departement" ] ;
+        rr:predicate <http://data.ign.fr/def/geofla#codeDpt>
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.code_insee_commune" ] ;
+        rr:predicate <http://data.ign.fr/def/geofla#numInsee>
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.pdl_gaz_grtgaz" ] ;
+        rr:predicate conso:pdl_gaz_grtgaz
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.pdl_total" ] ;
+        rr:predicate conso:pdl_total
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.pdl_electricite_rte" ] ;
+        rr:predicate conso:pdl_electricite_rte
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.consommation_electricite_rte" ] ;
+        rr:predicate conso:consommation_electricite_rte
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.hierarchie_geographique" ] ;
+        rr:predicate conso:hierarchie_geographique
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.geo_point_iris[0]" ] ;
+        rr:predicate wgs84_pos:lat;
+    ],
+    
+    [ rr:objectMap [
+        rml:reference "$.geo_point_iris[1]" ] ;
+        rr:predicate wgs84_pos:long;
+    ].
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
